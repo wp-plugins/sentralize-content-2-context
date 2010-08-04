@@ -22,6 +22,7 @@ class Sentralize_Widget extends WP_Widget {
 	$content_limit = $instance['content_limit'];
 	$show_title = $instance['show_title'];
 	$show_content = $instance['show_content'];
+	$show_timestamp = $instance['show_timestamp'];
 	$show_source = $instance['show_source'];
 	$count = 0;
 
@@ -44,8 +45,11 @@ class Sentralize_Widget extends WP_Widget {
 	
 				echo '<h3 class="post_title"><a href="'.$item->identifier.'" target="_blank">'.$item->title.'</a></h3>';
 
+				if($show_timestamp)
+					echo '<p class="timestamp"><small>'.date_i18n('D, d M Y', strtotime($item->published_at)).' - '.human_time_diff(strtotime($item->published_at)).' ago. </small></p>';
+
 				if($show_source)
-					echo '<p class="post_source"><small>From: '.$item->source->name.' | '.human_time_diff(strtotime($item->published_at)).' ago.</small></p>';
+					echo '<p class="post_source"><small>From: '.$item->source->name.'</small></p>';
 				
 				
 				if($show_content)				
@@ -67,6 +71,7 @@ class Sentralize_Widget extends WP_Widget {
 	$instance['content_limit'] = $new_instance['content_limit'];
 	$instance['show_title'] = $new_instance['show_title'];
 	$instance['show_content'] = $new_instance['show_content'];
+	$instance['show_timestamp'] = $new_instance['show_timestamp'];
 	$instance['show_source'] = $new_instance['show_source'];
         return $instance;
     }
@@ -79,6 +84,7 @@ class Sentralize_Widget extends WP_Widget {
 	$content_limit = esc_attr($instance['content_limit']);
 	$show_title = esc_attr($instance['show_title']);
 	$show_content = esc_attr($instance['show_content']);
+	$show_timestamp = esc_attr($instance['show_timestamp']);
 	$show_source = esc_attr($instance['show_source']);
 
 
@@ -107,6 +113,8 @@ class Sentralize_Widget extends WP_Widget {
 		<input class="checkbox" id="<?php echo $this->get_field_id('show_source'); ?>" name="<?php echo $this->get_field_name('show_source'); ?>" type="checkbox" value="1" <?php if($show_source) echo 'checked="checked"'; ?>" />
 		<label for="<?php echo $this->get_field_id('show_source'); ?>"><?php _e('Show Source and Timestamp?'); ?></label><br /><br />
 
+		<input class="checkbox" id="<?php echo $this->get_field_id('show_timestamp'); ?>" name="<?php echo $this->get_field_name('show_timestamp'); ?>" type="checkbox" value="1" <?php if($show_timestamp) echo 'checked="checked"'; ?>" />
+		<label for="<?php echo $this->get_field_id('show_timestamp'); ?>"><?php _e('Show Timestamp?'); ?></label><br /><br />
 
 		<label for="<?php echo $this->get_field_id('content_limit'); ?>">Content Limit (characters): 
 			<input class="widefat" id="<?php echo $this->get_field_id('content_limit'); ?>" name="<?php echo $this->get_field_name('content_limit'); ?>" type="text" value="<?php echo $content_limit; ?>" />

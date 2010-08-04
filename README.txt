@@ -2,7 +2,7 @@
 Tags: sentralize, widget
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.4
+Stable tag: 0.5
 
 
 == Description ==
