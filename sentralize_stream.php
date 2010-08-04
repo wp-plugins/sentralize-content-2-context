@@ -7,6 +7,7 @@
 	function sentralize_get_stream($api)
 	{
 		$cache_ttl = get_option('sentralize_cache_ttl'); // Cache TTL as a unix timestamp
+
 		$sentralize = 'http://c2c.sentralize.com/export/json/'; // URL to sentralize export
 
 		// Check whether we have a recent enough copy of the stream in the cache
@@ -82,7 +83,7 @@
 				<div class="sz_data_item_title"><h3><a href="'.$item->identifier.'" target="_blank">'.$item->title.'</a></h3></div>';
 
 				if($show_source)
-					$html = $html.'<div class="sz_data_item_source"><small>From: '.$item->source->name.' | '.human_time_diff(strtotime($item->published_at)).' ago.</small></div>';
+					$html = $html.'<div class="sz_data_item_source"><small>From: '.$item->source->name.' - '.date_i18n('D, d M Y ',strtotime($item->published_at)).' - '.human_time_diff(strtotime($item->published_at)).' ago.</small></div>';
 			
 				if($show_content)
 					$html = $html.'<div class="sz_data_item_content "><p>'.sentralize_truncate($item->content, $content_length, '... <a href="'.$item->identifier.'" target="_blank">Read More</a>', false).'</p></div>';
