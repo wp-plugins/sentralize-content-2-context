@@ -3,7 +3,7 @@
 Plugin Name: Sentralize
 Plugin URI: http://sentralize.com
 Description: Wordpress integration with Sentralize C-2-C Service
-Version:  0.4
+Version:  0.5
 Author: Sentralize
 Author URI: http://www.sentralize.com
 */
